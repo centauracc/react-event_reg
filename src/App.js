@@ -1,13 +1,11 @@
 import React from "react";
 import "./App.css";
-import EventList from "./components/EventList";
+import MyRouter from "./components/MyRouter";
 
 const App = () => {
   return (
     <div className="App">
-      <div>
-        <EventList />
-      </div>
+      <MyRouter />
     </div>
   );
 };

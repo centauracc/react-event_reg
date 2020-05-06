@@ -1,0 +1,28 @@
+.text-event-date {
+  font-size: 1rem;
+  color: red;
+  font-weight: 600;
+}
+
+.text-event-title {
+  font-size: 1.125rem;
+  color: black;
+  font-weight: 700;
+}
+
+.event-item {
+  border: 1px solid #3f51b5;
+  margin: 16px;
+  border-radius: 5px;
+  padding: 8px;
+  text-align: left;
+}
+
+.event-find-out {
+  text-align: right;
+}
+
+.event-icons {
+  text-align: right;
+  font-size: 1rem;
+}

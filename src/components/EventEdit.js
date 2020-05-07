@@ -20,6 +20,7 @@ class EventEdit extends React.Component {
       description: "",
       errorMessage: null,
       changesSaved: false,
+      createEvent: false,
     };
   }
 
@@ -36,6 +37,10 @@ class EventEdit extends React.Component {
       postalCode: this.props.event.venue.postalCode,
       description: this.props.event.description,
     });
+
+    if (this.props.event._id === "") {
+      this.setState({ createEvent: true });
+    }
   };
 
   saveChangesToEventViaApi = () => {
@@ -59,14 +64,25 @@ class EventEdit extends React.Component {
 
     const headers = { "content-type": "application/json" };
 
-    api
-      .put(`/events/${this.state._id}`, payload, { headers: headers })
-      .then((response) => {
-        this.setState({ changesSaved: true });
-      })
-      .catch((error) => {
-        this.setState({ errorMessage: "Cannot save changes" });
-      });
+    if (this.state.createEvent) {
+      api
+        .post("/events", payload, { headers: headers })
+        .then((response) => {
+          this.setState({ changesSaved: true });
+        })
+        .catch((error) => {
+          this.setState({ errorMessage: "Cannot create event" });
+        });
+    } else {
+      api
+        .put(`/events/${this.state._id}`, payload, { headers: headers })
+        .then((response) => {
+          this.setState({ changesSaved: true });
+        })
+        .catch((error) => {
+          this.setState({ errorMessage: "Cannot save changes" });
+        });
+    }
   };
 
   handleSave = () => {
@@ -82,7 +98,7 @@ class EventEdit extends React.Component {
 
   displayEventEdit = () => {
     return this.state.changesSaved ? (
-      window.location.reload()
+      (window.location.href = "/")
     ) : (
       <EventEditScreen
         key={this.props.event._id}

@@ -23,7 +23,7 @@ function EventEditScreen({ event, handleSave, handleChange }) {
           <TextField
             margin="normal"
             label="Title"
-            defaultValue={event.title.trim()}
+            defaultValue={event.title}
             style={{ width: regularWidth }}
             name="title"
             onChange={handleChange}
@@ -34,7 +34,11 @@ function EventEditScreen({ event, handleSave, handleChange }) {
             <TextField
               margin="normal"
               label="Day"
-              defaultValue={moment(event.date).format("DD")}
+              defaultValue={
+                moment(event.date, moment.ISO_8601, true).isValid()
+                  ? moment(event.date).format("DD")
+                  : ""
+              }
               style={{ width: shortWidth }}
               name="date"
               onChange={handleChange}
@@ -45,7 +49,11 @@ function EventEditScreen({ event, handleSave, handleChange }) {
               margin="normal"
               label="Month"
               style={{ width: shortWidth }}
-              defaultValue={moment(event.date).format("MM")}
+              defaultValue={
+                moment(event.date, moment.ISO_8601, true).isValid()
+                  ? moment(event.date).format("MM")
+                  : ""
+              }
               name="month"
               onChange={handleChange}
             />
@@ -55,7 +63,11 @@ function EventEditScreen({ event, handleSave, handleChange }) {
               margin="normal"
               label="Year"
               style={{ width: shortWidth }}
-              defaultValue={moment(event.date).format("YYYY")}
+              defaultValue={
+                moment(event.date, moment.ISO_8601, true).isValid()
+                  ? moment(event.date).format("YYYY")
+                  : ""
+              }
               name="year"
               onChange={handleChange}
             />
@@ -65,7 +77,11 @@ function EventEditScreen({ event, handleSave, handleChange }) {
               margin="normal"
               label="Hour"
               style={{ width: shortWidth }}
-              defaultValue={moment(event.date).format("HH")}
+              defaultValue={
+                moment(event.date, moment.ISO_8601, true).isValid()
+                  ? moment(event.date).format("HH")
+                  : ""
+              }
               name="hour"
               onChange={handleChange}
             />
@@ -75,7 +91,11 @@ function EventEditScreen({ event, handleSave, handleChange }) {
               margin="normal"
               label="Minute"
               style={{ width: shortWidth }}
-              defaultValue={moment(event.date).format("mm")}
+              defaultValue={
+                moment(event.date, moment.ISO_8601, true).isValid()
+                  ? moment(event.date).format("mm")
+                  : ""
+              }
               name="minute"
               onChange={handleChange}
             />

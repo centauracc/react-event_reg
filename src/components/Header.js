@@ -11,9 +11,9 @@ const Header = () => {
           <Typography variant="h6" color="inherit" className="title">
             Upcoming Events
           </Typography>
-          <Link to="/login">
+          <Link to="/create">
             <Button variant="contained" color="primary">
-              Sign In
+              Create
             </Button>
           </Link>
         </Toolbar>

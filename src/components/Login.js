@@ -46,11 +46,16 @@ class Login extends React.Component {
       <div>
         <br />
         <div>
-          <TextField label="username" onChange={this.handleUsernameChange} />
+          <TextField
+            margin="normal"
+            label="Username"
+            onChange={this.handleUsernameChange}
+          />
         </div>
         <div>
           <TextField
-            label="password"
+            margin="normal"
+            label="Password"
             type="password"
             onChange={this.handlePasswordChange}
           />

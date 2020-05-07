@@ -1,6 +1,7 @@
 import React from "react";
 import api from "../utils/api";
 import Event from "./Event";
+import EventEdit from "./EventEdit";
 
 class EventList extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class EventList extends React.Component {
     this.state = {
       events: [],
       errorMessage: null,
+      eventIdToModify: null,
     };
   }
 
@@ -16,26 +18,32 @@ class EventList extends React.Component {
     this.fetchEventsViaApi();
   };
 
+  componentWillUnmount = () => {
+    this.setState({ eventIdToModify: null });
+  };
+
   displayEvents = () => {
     return this.state.events.map((event) => {
       const deleteEvent = () => {
         const filteredEvents = this.state.events.filter((eventFilter) => {
-          this.setState({ eventIdToRemove: event._id });
           return eventFilter._id !== event._id;
         });
         this.setState({ events: [...filteredEvents] });
         this.removeEventViaApi(event._id);
       };
 
-      return (
+      const editEvent = () => {
+        this.setState({ eventIdToModify: event._id });
+      };
+
+      return this.state.eventIdToModify === event._id ? (
+        <EventEdit key={event._id} event={event} />
+      ) : (
         <Event
           key={event._id}
-          id={event._id}
-          title={event.title}
-          date={event.date}
-          venue={event.venue}
-          description={event.description}
+          event={event}
           deleteEvent={deleteEvent}
+          editEvent={editEvent}
         />
       );
     });
@@ -58,7 +66,7 @@ class EventList extends React.Component {
     api
       .delete(`/events/${id}`)
       .then((response) => {
-        console.log("response.data:", response.data);
+        //todo
       })
       .catch((err) => {
         this.setState({ errorMessage: "Cannot remove event via API" });

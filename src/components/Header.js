@@ -1,11 +1,7 @@
 import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
-
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
 const Header = () => {
   return (
